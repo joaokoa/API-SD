@@ -1,27 +1,77 @@
-POST http://localhost:3333/videos
+POST http://localhost:3333/usuarios
 Content-Type: application/json
 
 {
-    "title": "Video node",
-    "description": "Esse é o primeiro vídeo",
-    "duration": 180
+    "nome": "joao",
+    "email": "test@test.com.br",
+    "senha": "teste"
 }
 
 ###
 
-GET http://localhost:3333/videos?search=
+GET http://localhost:3333/usuarios?search=
 ###
 
-PUT http://localhost:3333/videos/489920a4-8cbc-42f5-8df0-a956483951d4
+PUT http://localhost:3333/usuarios/5ea778b4-c839-4fe0-aa5f-40c34c1da001
 Content-Type: application/json
 
 {
-    "title": "Video 02",
-    "description": "Esse é o video 1",
-    "duration": 180
+    "nome": "caio",
+    "email": "mamuteesbelto@gamail.com",
+    "senha": "71623871263782163781ahnsujd"
 }
 
 
 ###
 
-DELETE http://localhost:3333/videos/b2286287-ab06-42ce-8c90-7bd8b99abca4
+DELETE http://localhost:3333/usuarios/3e545f69-cea8-4508-b333-480799169e60
+
+###
+
+POST http://localhost:3333/categoria
+Content-Type: application/json
+
+{
+    "nome": "Cafés"
+}
+
+###
+
+GET http://localhost:3333/categoria?search=
+
+###
+
+DELETE http://localhost:3333/categoria/1
+
+###
+
+POST http://localhost:3333/produtos
+Content-Type: application/json
+
+{
+    "nome": "Café preto",
+    "description": "Café coado",
+    "preco": 2.50,
+    "categoriaId": 1
+}
+
+###
+
+GET http://localhost:3333/produtos?search=
+
+###
+
+PUT http://localhost:3333/produtos/1
+Content-Type: application/json
+
+{
+    "nome": "Café com leite",
+    "description": "Café coado acrescido com leite morno",
+    "preco": 4.00,
+    "categoriaId": 1
+}
+
+
+###
+
+DELETE http://localhost:3333/produtos/1

@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto"
 import { sql } from './db.js'
+import jwt from 'jsonwebtoken';
 
 export class DatabasePostgres{
     async listUser(search) {
@@ -85,5 +86,19 @@ export class DatabasePostgres{
         await sql `delete from produtos where id = ${id}`
     }
 
-}
+    async authenticateUser(email, senha) {
+        try {
+            const query = sql`SELECT id, senha FROM usuarios WHERE email = ${email}`;
+            const result = await query;
 
+            if (result && result.length > 0 && result[0].senha === senha) {
+                const token = jwt.sign({ userId: result[0].id }, 'suaChaveSecreta');
+                return token;
+            }
+
+            return null; // Credenciais inválidas
+        } catch (error) {
+            throw new Error('Erro durante a autenticação');
+        }
+    }
+}

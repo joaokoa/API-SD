@@ -24,7 +24,7 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3333/usuarios/3e545f69-cea8-4508-b333-480799169e60
+DELETE http://localhost:3333/usuarios/6f879155-5925-4771-a47e-ccdb1b5bb243
 
 ###
 
@@ -32,7 +32,7 @@ POST http://localhost:3333/categoria
 Content-Type: application/json
 
 {
-    "nome": "Cafés"
+    "nome": "Café em grãos"
 }
 
 ###
@@ -49,9 +49,9 @@ POST http://localhost:3333/produtos
 Content-Type: application/json
 
 {
-    "nome": "Café preto",
-    "description": "Café coado",
-    "preco": 2.50,
+    "nome": "Café 100% Arábica 1Kg",
+    "description": "Grãos de café 100 Arábica",
+    "preco": 50.00,
     "categoriaId": 1
 }
 

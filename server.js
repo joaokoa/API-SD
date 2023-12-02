@@ -1,5 +1,7 @@
 import { fastify } from 'fastify'
-import fastifyCors from 'fastify-cors';
+import fastifyCors from 'fastify-cors'
+import jwt from 'jsonwebtoken';
+
 //import { DatabaseMemory } from './database-memory.js'
 import { DatabasePostgres } from './database-postgres.js'
 
@@ -118,8 +120,35 @@ server.post('/produtos', async (request, reply) => {
      return reply.status(204).send()
  })
 
+// Rota para autenticação de usuário
+server.post('/login', async (request, reply) => {
+    const { email, senha } = request.body;
 
- server.register(fastifyCors, {
+    try {
+        const token = await database.authenticateUser(email, senha);
+        if (token) {
+            reply.send({ token });
+        } else {
+            reply.status(401).send({ error: 'Credenciais inválidas' });
+        }
+    } catch (error) {
+        reply.status(500).send({ error: 'Erro durante a autenticação' });
+    }
+});
+
+// Middleware de autenticação (protecting routes)
+const authenticate = async (request, reply) => {
+    // Lógica de verificação do token JWT
+    // ...
+};
+
+// Rotas protegidas que requerem autenticação
+server.get('/recurso-protegido', { preHandler: authenticate }, async (request, reply) => {
+    // Lógica para acessar recursos protegidos
+    // ...
+});
+
+server.register(fastifyCors, {
     origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type'],

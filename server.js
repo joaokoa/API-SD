@@ -156,6 +156,5 @@ server.register(fastifyCors, {
 });
 
 server.listen({
-    host: '0.0.0.0',
     port: process.env.port ?? 3333,
 })

@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto"
 import { sql } from './db.js'
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 export class DatabasePostgres{
     async listUser(search) {
@@ -18,7 +19,9 @@ export class DatabasePostgres{
     async createUser(usuario) {
         const userId = randomUUID()
         const { nome, email, senha } = usuario
-        await sql `insert into usuarios (id, nome, email, senha) VALUES (${userId}, ${nome}, ${email}, ${senha})`
+        const hashedPassword = await bcrypt.hash(senha, 10);
+
+        await sql `insert into usuarios (id, nome, email, senha) VALUES (${userId}, ${nome}, ${email}, ${hashedPassword})`
     }
 
     async updateUser(id, usuario) {
@@ -85,20 +88,27 @@ export class DatabasePostgres{
     async deleteProd(id) {
         await sql `delete from produtos where id = ${id}`
     }
-
     async authenticateUser(email, senha) {
         try {
             const query = sql`SELECT id, senha FROM usuarios WHERE email = ${email}`;
             const result = await query;
-
-            if (result && result.length > 0 && result[0].senha === senha) {
-                const token = jwt.sign({ userId: result[0].id }, 'suaChaveSecreta');
-                return token;
+    
+            if (result && result.length > 0) {
+                const storedPassword = result[0].senha;
+    
+                // Comparação da senha fornecida com o hash armazenado usando bcrypt
+                const match = await bcrypt.compare(senha, storedPassword);
+    
+                if (match) {
+                    const token = jwt.sign({ userId: result[0].id }, 'suaChaveSecreta');
+                    return token;
+                }
             }
-
-            return null; // Credenciais inválidas
+    
+            return null;
         } catch (error) {
             throw new Error('Erro durante a autenticação');
         }
     }
+    
 }

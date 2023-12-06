@@ -1,4 +1,4 @@
-POST http://localhost:3333/usuarios
+POST https://api-sd-oqhn.onrender.com/usuarios
 Content-Type: application/json
 
 {
@@ -9,26 +9,26 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3333/usuarios?search=
+GET https://api-sd-oqhn.onrender.com/usuarios?search=
 ###
 
-PUT http://localhost:3333/usuarios/5ea778b4-c839-4fe0-aa5f-40c34c1da001
+PUT https://api-sd-oqhn.onrender.com/usuarios/5ea778b4-c839-4fe0-aa5f-40c34c1da001
 Content-Type: application/json
 
 {
     "nome": "caio",
-    "email": "mamuteesbelto@gamail.com",
-    "senha": "71623871263782163781ahnsujd"
+    "email": "caioba@gmail.com",
+    "senha": "123"
 }
 
 
 ###
 
-DELETE http://localhost:3333/usuarios/6f879155-5925-4771-a47e-ccdb1b5bb243
+DELETE https://api-sd-oqhn.onrender.com/usuarios/597f08dc-4048-4e9e-9e34-6b701a018a8c
 
 ###
 
-POST http://localhost:3333/categoria
+POST https://api-sd-oqhn.onrender.com/categoria
 Content-Type: application/json
 
 {
@@ -37,15 +37,15 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3333/categoria?search=
+GET https://api-sd-oqhn.onrender.com/categoria?search=
 
 ###
 
-DELETE http://localhost:3333/categoria/1
+DELETE https://api-sd-oqhn.onrender.com/categoria/1
 
 ###
 
-POST http://localhost:3333/produtos
+POST https://api-sd-oqhn.onrender.com/produtos
 Content-Type: application/json
 
 {
@@ -57,11 +57,11 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3333/produtos?search=
+GET https://api-sd-oqhn.onrender.com/produtos?search=
 
 ###
 
-PUT http://localhost:3333/produtos/1
+PUT https://api-sd-oqhn.onrender.com/produtos/1
 Content-Type: application/json
 
 {
@@ -74,4 +74,4 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3333/produtos/1
+DELETE https://api-sd-oqhn.onrender.com/produtos/1

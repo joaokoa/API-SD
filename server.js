@@ -149,7 +149,7 @@ server.get('/recurso-protegido', { preHandler: authenticate }, async (request, r
 });
 
 server.register(fastifyCors, {
-    origin: 'https://superlative-empanada-6bf4fb.netlify.app/',
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type'],
     credentials: true,
